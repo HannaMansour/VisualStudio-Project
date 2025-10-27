@@ -1,0 +1,82 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "My Music Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        /* ===== Basic Page Styling ===== */
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        iframe {
+            width: 560px;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        @@media (max-width: 600px) {
+            iframe {
+                width: 90%;
+                height: 200px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="animatedTitle">My Favorite Song 🎵</h1>
+
+    <!-- Replace the YouTube link with your favorite song -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Fpn1imb9qZg?si=rM7KmvvNeX3eqCKF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+   
+
+    <script>
+        // ===== JavaScript Looped Animation for the H1 =====
+        const title = document.getElementById('animatedTitle');
+        let hue = 0;
+
+        function animateTitle() {
+            hue = (hue + 2) % 360;
+            title.style.color = `hsl(${hue}, 100%, 70%)`;
+            title.style.textShadow = `0 0 20px hsl(${(hue + 180) % 360}, 100%, 60%)`;
+            title.style.transform = `scale(${1 + 0.05 * Math.sin(Date.now() / 200)})`;
+            requestAnimationFrame(animateTitle);
+        }
+
+        animateTitle();
+    </script>
+</body>
+</html>
